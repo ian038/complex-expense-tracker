@@ -7,7 +7,7 @@ import { SpeechProvider } from "@speechly/react-client";
 
 ReactDOM.render(
   <React.StrictMode>
-    <SpeechProvider>
+    <SpeechProvider appId="9a3cb16c-7ba7-49d7-9fe1-2e63ec55fa81" language="en-US">
       <ExpenseTrackerProvider>
         <App />
       </ExpenseTrackerProvider>

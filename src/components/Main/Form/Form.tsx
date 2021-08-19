@@ -24,6 +24,7 @@ const Form: React.FC = () => {
     const classes = useStyles()
 
     const createTransaction = () => {
+        if (Number.isNaN(Number(formData.amount)) || !formData.date.includes('-')) return
         const transaction = {
             ...formData,
             amount: Number(amount),
@@ -45,8 +46,28 @@ const Form: React.FC = () => {
                 return setFormData(initialState)
             }
             segment.entities.forEach(e => {
-                console.log(e.value)
+                const category = `${e.value.charAt(0)}${e.value.slice(1).toLowerCase()}`
+                switch (e.type) {
+                    case 'amount':
+                        setFormData({ ...formData, amount: Number(e.value) })
+                        break
+                    case 'category':
+                        if (incomeCategories.map(c => c.type).includes(category)) {
+                            setFormData({ ...formData, category, type: 'Income' })
+                        } else if (expenseCategories.map(c => c.type).includes(category)) {
+                            setFormData({ ...formData, category, type: 'Expense' })
+                        }
+                        break
+                    case 'date':
+                        setFormData({ ...formData, date: e.value })
+                        break
+                    default:
+                        break
+                }
             })
+            if (segment.isFinal && formData.amount && formData.category && formData.type && formData.date) {
+                createTransaction()
+            }
         }
     }, [segment])
 
