@@ -1,11 +1,11 @@
 import { useReducer, createContext, useContext } from 'react'
 import { TransactionProps } from '../types'
 
-const initialState: TransactionProps[] = JSON.parse(localStorage.getItem('transactions')) || [[{
+const initialState: TransactionProps[] = JSON.parse(localStorage.getItem('transactions')) || [{
     "type": "Income", "category": "Extra income", "amount": 45, "date": "2021-08-19", "id": "6f4bd1cd-0d05-498a-aa16-01d7deaef0fb"
 }, { "type": "Expense", "category": "Entertainment", "amount": 25, "date": "2021-08-21", "id": "ffa99534-2436-465c-8327-a054e6af411d" }, { "type": "Expense", "category": "Clothes", "amount": 30, "date": "2021-08-25", "id": "557d900d-4c6b-4bf4-a981-813ed185f67f" }, {
     "type": "Income", "category": "Business", "amount": 100, "date": "2021-08-24", "id": "676995cd-1de7-4eb1-9612-30e786541474"
-}]]
+}]
 
 export const ExpenseTrackerContext = createContext<any>({})
 
