@@ -7,7 +7,7 @@ const initialState: TransactionProps[] = JSON.parse(localStorage.getItem('transa
     "type": "Income", "category": "Business", "amount": 100, "date": "2021-08-24", "id": "676995cd-1de7-4eb1-9612-30e786541474"
 }]
 
-export const ExpenseTrackerContext = createContext<any>({})
+export const ExpenseTrackerContext = createContext<TransactionProps[] | any>(initialState)
 
 enum TransactionActionKind {
     DELETE_TRANSACTION = 'DELETE_TRANSACTION',
@@ -43,7 +43,7 @@ function useProvideExpenseTracker() {
         dispatch({ type: TransactionActionKind.DELETE_TRANSACTION, payload: id });
     };
 
-    const addTransaction = (transaction: any) => {
+    const addTransaction = (transaction: TransactionProps) => {
         dispatch({ type: TransactionActionKind.ADD_TRANSACTION, payload: transaction });
     };
 
